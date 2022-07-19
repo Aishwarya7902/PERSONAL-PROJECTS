@@ -1,0 +1,57 @@
+--->WHAT IS SUDOKU :
+
+Sudoku is a puzzle game designed for a single player, much like a crossword puzzle. 
+The puzzle itself is nothing more than a grid of little boxes called "cells".
+They are stacked nine high and nine wide, making 81 cells total. The puzzle comes with some of the cells (usually less than half of them) already filled in,
+
+
+--->RULES OF SUDOKU PUZZLE:
+
+1.It contains a 9 x 9 puzzle grid sub-divided into 3 x 3 blocks of 9 numbers.
+
+2.Each number of any cell in the 9 x 9 puzzle can only be a number between 1 to 9, both inclusive.
+
+3.Each 3 x 3 block should have all the numbers between 1 to 9 in any cell. As a 3 x 3 block has 9 cells, it’s obvious that no number can repeat.
+
+4.Similarly each row of the 9 x 9 puzzle must have all the numbers between 1 to 9. Again, as each row has 9 cells, no number can repeat.
+
+5.Each column needs to have the numbers between 1 to 9 as well and as above, no number can repeat.
+
+Once we completely filled in a Sudoku Puzzle satisfying all the above criteria, we can safely assume that the puzzle has been solved.
+ 
+--->Note: Character ‘.’ indicates empty cell.
+
+--->EXPLAINATION:
+ The empty cells are filled with the possible numbers. There can exist many such arrangements of numbers.
+ 
+ 
+ ---->DATA STRUCTURES USED
+ recusrion and backtrackig
+ 
+ 
+ ---->INTUTION
+ 
+Since we have to fill the empty cells with available possible numbers and we can also have multiple solutions,
+the main intuition is to try every possible way of filling the empty cells. And the more correct way to try all possible solutions is to use recursion.
+In each call to the recursive function, we just try all the possible numbers for a particular cell and transfer the updated board to the next recursive call.
+
+
+---->APPROACH
+
+1.Our main recursive function(solve()) is going to just do a plain matrix traversal of the sudoku board. 
+2.When we find an empty cell, we pause and try to put all available numbers(1 – 9) in that particular empty cell.
+3.the board has to satisfy all the conditions, right? So, for that we have another function(isValid()) which will check whether the number we have inserted into 
+that empty cell will not violate any conditions.
+4.If it is violating, we try with the next number
+5.If it is not, we call the same function recursively, but this time with the updated state of the board. 
+Now, as usual it tries to fill the remaining cells in the board in the same way
+6.Now we’ll come to the returning values. If at any point we cannot insert any numbers from 1 – 9 in a particular cell,
+it means the current state of the board is wrong and we need to backtrack.
+7. An important point to follow is, we need to return false to let the parent function(which is called this function) know that we cannot fill this way.
+This will serve as a hint to that function, that it needs to try with the next possible number. 
+8.If a recursive call returns true, we can assume that we found one possible way of filling and we simply do an early return.
+ 
+---->Time Complexity: O(9(n ^ 2)), in the worst case, for each cell in the n2 board, we have 9 possible numbers.
+
+Space Complexity: O(1), since we are refilling the given board itself, there is no extra space required, so constant space complexity.
+ 
